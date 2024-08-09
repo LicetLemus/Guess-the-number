@@ -22,3 +22,8 @@ def validate_number(number, number_random):
         print("El número a adivinar es mayor")
     else:
         print("El número a adivinar es menor")
+
+def player_user():
+    """The function allows the user to enter a number"""
+
+    number_user.append(int(input("\nIntroduce un número: ")))
