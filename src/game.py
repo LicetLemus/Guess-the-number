@@ -1,7 +1,7 @@
 import random
 
-from players import player_user, player_computer, number_user, number_computer
-from utils import validate_number
+from src.players import player_user, player_computer, number_user, number_computer
+from src.utils import validate_number
 
 
 MAX_TRY = 10

@@ -1,4 +1,4 @@
-from game import game
+from src.game import game
 
 game()
 
@@ -12,4 +12,3 @@ def play_again():
         print("¡Gracias por jugar!")
 
 play_again()
-    
