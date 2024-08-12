@@ -19,6 +19,7 @@ def game():
         player_user()
         validate_number(number_user[-1], number_random)
         player_computer(number_random)
+        validate_number(number_computer[-1], number_random)
         try_done_round += 1
 
         if try_done_round == 10:
