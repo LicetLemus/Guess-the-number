@@ -5,7 +5,6 @@ number_computer = []
 
 def player_user():
     """The function allows the user to enter a number"""
-
     number_user.append(int(input("\nIntroduce un número: ")))
 
 

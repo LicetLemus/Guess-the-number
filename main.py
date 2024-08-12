@@ -1,14 +1,13 @@
 from src.game import game
 
-game()
-
-def play_again():
-    """The function allows the user to play again the game"""
-
-    play_again_user = input("¿Quieres jugar de nuevo? (s/n): ")
-    if play_again_user == "s":
+def main():
+    while True:
         game()
-    else:
-        print("¡Gracias por jugar!")
+        play_again_user = input("¿Quieres jugar de nuevo? (s/n): ")
+        if play_again_user == "n":
+            print("¡Gracias por jugar!")
+            break
 
-play_again()
+
+if __name__ == "__main__": # si el archivo es el principal, se llama a la función main
+    main() 
