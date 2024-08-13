@@ -17,9 +17,16 @@ def game():
     try_done_round = 0
     while try_done_round < MAX_TRY:
         player_user()
-        validate_number(number_user[-1], number_random)
+        if validate_number(number_user[-1], number_random, "usuario"):
+            print("¡Juego terminado!")
+            break
+        
         player_computer(number_random)
-        validate_number(number_computer[-1], number_random)
+        # si el número introducido por el ordenador es igual al número aleatorio en caso de que sea false se sigue con el juego
+        if validate_number(number_computer[-1], number_random, "ordenador"):
+            print("¡Juego terminado!")
+            break
+        
         try_done_round += 1
 
         if try_done_round == 10:
