@@ -1,5 +1,8 @@
 import random
 
+def print_information():
+    print("Bienvenido al juego de adivinar el número, ¡Buena suerte!")
+    print("¡se ha generado un número aleatorio entre 1 y 100!")
 
 def get_random_number(a, b):
     """"
@@ -28,15 +31,14 @@ def validate_number(number, number_random, entity=""):
         str: A message with the result of the comparison.
     """
     if not number or number < 1 or number > 100:
-        return False, "El número introducido no es válido ({entity})"
+        print(f"El número introducido por el {entity} no es válido")
+        return False
     elif number == number_random:
-        return True, "¡Felicidades! Has adivinado el número ({entity})"
+        print(f"¡El número introducido por el {entity} es correcto!")
+        return True
     elif number < number_random:
-        return False, "El número es mayor ({entity})"
+        print(f"El número introducido por el {entity} es menor que el número a adivinar")
+        return False
     else:
-        return False, "El número es menor ({entity})"
-
-
-def print_information():
-    print("Bienvenido al juego de adivinar el número, ¡Buena suerte!")
-    print("¡se ha generado un número aleatorio entre 1 y 100!")
+        print(f"El número introducido por el {entity} es mayor que el número a adivinar")
+        return False
