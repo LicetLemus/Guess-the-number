@@ -1,6 +1,6 @@
 # The game module contains the game function that allows the user to play the game.
 from .players import set_number_user, set_number_computer, print_number_user_computer
-from .utils import get_random_number, print_information, validate_number
+from .utils import get_random_number, print_information, get_validate_number
 
 MAX_TRY = 10
 
@@ -13,20 +13,18 @@ def game():
     try_done_round = 0
     while try_done_round < MAX_TRY:
         number_user = set_number_user()
-        print("----------------------------------------------------", number_user)
         number_computer = set_number_computer(number_user[-1])
-        print("----------------------------------------------------", number_computer)
         print_number_user_computer(number_user, number_computer)
-        print("----------------------------------------------------")
         
-        if validate_number(number_user[-1], number_random, "usuario"):
+        is_correct_user, message_user = get_validate_number(number_user[-1], number_random, "usuario")
+        print(message_user)
+        if is_correct_user:
             print("¡Juego terminado!")
             break
         
-        print("-----------------------------------------------")
-        
-        # si el número introducido por el ordenador es igual al número aleatorio en caso de que sea false se sigue con el juego
-        if validate_number(number_computer[-1], number_random, "ordenador"):
+        is_correct_computer, message_computer = get_validate_number(number_computer[-1], number_random, "ordenador")
+        print(message_computer)
+        if is_correct_computer:
             print("¡Juego terminado!")
             break
         
