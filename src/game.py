@@ -5,10 +5,15 @@ from .utils import get_random_number, print_information, get_validate_number
 MAX_TRY = 10
 
 def game():
-    """ The function allows the user to play the game.
     """
-    range_limit = (1, 100)
-    number_random = get_random_number(range_limit)
+    The function generates a random number between 1 and 100 and asks the user to guess it.
+    The user and the computer have a maximum of 10 attempts to guess the number.
+    """
+    ranges = {
+        "min": 1,
+        "max": 100
+    }
+    number_random = get_random_number(ranges)
     print_information()
 
     try_done_round = 0
@@ -17,13 +22,13 @@ def game():
         number_computer = set_number_computer(number_user[-1])
         print_number_user_computer(number_user, number_computer)
         
-        is_correct_user, message_user = get_validate_number(number_user[-1], number_random, range_limit, "usuario")
+        is_correct_user, message_user = get_validate_number(number_user[-1], number_random, ranges, "usuario")
         print(message_user)
         if is_correct_user:
             print("¡Juego terminado!")
             break
         
-        is_correct_computer, message_computer = get_validate_number(number_computer[-1], number_random, range_limit, "computadora")
+        is_correct_computer, message_computer = get_validate_number(number_computer[-1], number_random, ranges, "computadora")
         print(message_computer)
         if is_correct_computer:
             print("¡Juego terminado!")
