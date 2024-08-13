@@ -17,8 +17,6 @@ def get_random_number(a, b):
     number_random = random.randint(a, b)
     return number_random
 
-
-
 def validate_number(number, number_random, entity=""):
     """The function validates the number entered by the user or the computer.  
     Args:
@@ -26,19 +24,18 @@ def validate_number(number, number_random, entity=""):
         number_random (int): The number to compare against.
         entity (str): A description of who is guessing (e.g., "usuario" or "ordenador").
     
-    Return:
+    Returns:
         bool: True if the number is correct, False otherwise.
-        str: A message with the result of the comparison.
     """
     if not number or number < 1 or number > 100:
-        print(f"El número introducido por el {entity} no es válido")
+        print(f"{entity}: El número no es válido")
         return False
     elif number == number_random:
-        print(f"¡El número introducido por el {entity} es correcto!")
+        print(f"¡Ganaste {entity}!, adivinaste el número")
         return True
     elif number < number_random:
-        print(f"El número introducido por el {entity} es menor que el número a adivinar")
+        print(f"{entity}: El número a adivinar es mayor")
         return False
     else:
-        print(f"El número introducido por el {entity} es mayor que el número a adivinar")
+        print(f"{entity}: El número a adivniar es menor")
         return False
