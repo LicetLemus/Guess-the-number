@@ -1,6 +1,9 @@
 from src.game import game
 
 def main():
+    """
+    The main function allows the user to play the game and ask if they want to play again
+    """
     while True:
         game()
         play_again_user = input("¿Quieres jugar de nuevo? (s/n): ")
