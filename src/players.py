@@ -41,10 +41,11 @@ def set_number_user():
     input_value = get_input_value()
     number_user_current = validate_number_user(input_value)
     numbers_user.append(number_user_current)
+    numbers_user_computer.append(number_user_current)
     return numbers_user
     
 #-------------------------------------------------------------computer------------------------------------------------------------
-def get_number_computer(feedback, user_number):
+def get_number_computer(feedback):
     """
     The function generates a random number for the computer.
     
@@ -53,16 +54,20 @@ def get_number_computer(feedback, user_number):
     return:
         int: The number generated for the computer.
     """
+    last_number_user_computer = numbers_user_computer[-1]
+    order_numbers_user_computer = sorted(set(numbers_user_computer))
+    index = order_numbers_user_computer.index(last_number_user_computer) 
+    
     if feedback == "":
         return random.randint(1, 100)
     if feedback == "random es mayor":
-        return random.randint(user_number, 100)
+        return random.randint(order_numbers_user_computer[index], order_numbers_user_computer[index + 1])
     elif feedback == "random es menor":
-        return random.randint(1, user_number)
+        return random.randint(order_numbers_user_computer[index -1], order_numbers_user_computer[index])
     else:
         return random.randint(1, 100)
 
-def set_number_computer(feedback, user_number):
+def set_number_computer(feedback):
     """
     This function call the get_number_computer function and add the number entered by the computer to a list.
     
@@ -72,8 +77,9 @@ def set_number_computer(feedback, user_number):
     Return:
         list: The list with the number entered by the computer.
     """
-    number_computer_current = get_number_computer(feedback, user_number)
+    number_computer_current = get_number_computer(feedback)
     numbers_computer.append(number_computer_current)
+    numbers_user_computer.append(number_computer_current)
     return numbers_computer
 
 
