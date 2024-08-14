@@ -21,7 +21,7 @@ class TestGame(unittest.TestCase):
         
         mock_get_random_number.assert_called_once_with({'min': 1, 'max': 100})
         mock_print_information.assert_called_once()
-        mock_set_number_user.assert_called_once_with([])
+        mock_set_number_user.assert_called_once_with([], {'min': 1, 'max': 100})
         mock_set_number_computer.assert_called_once_with([50], '', {'min': 1, 'max': 100})
         mock_get_validate_number.assert_called_once_with(50, 50, {'min': 1, 'max': 100}, 'usuario')
         mock_print.assert_any_call("¡Juego terminado!")
@@ -45,7 +45,7 @@ class TestGame(unittest.TestCase):
         
         mock_get_random_number.assert_called_once_with({'min': 1, 'max': 100})
         mock_print_information.assert_called_once()
-        mock_set_number_user.assert_called_once_with([])
+        mock_set_number_user.assert_called_once_with([], {'min': 1, 'max': 100})
         mock_set_number_computer.assert_called_once_with([30], '', {'min': 1, 'max': 100})
         mock_get_validate_number.assert_has_calls([
             call(30, 50, {'min': 1, 'max': 100}, 'usuario'),
