@@ -1,59 +1,85 @@
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, call
 from src.game import game
-from src.players import number_user, number_computer
 
 
 MAX_TRY = 10 
 
 class TestGame(unittest.TestCase):
 
-    @patch('src.game.validate_number')
-    @patch('src.game.player_user')
-    @patch('src.game.player_computer')
-    @patch('builtins.print')  # Para capturar las salidas de print
-    def test_game_user_wins(self, mock_print, mock_player_computer, mock_player_user, mock_validate_number):
-        """Test cuando el usuario adivina el número correcto"""
+    @patch('src.game.get_random_number', return_value=50)
+    @patch('src.game.print_information')
+    @patch('src.game.set_number_user', return_value=(50, [50]))
+    @patch('src.game.set_number_computer', return_value=(40, [50, 40]))
+    @patch('src.game.get_validate_number', side_effect=[(True, "¡Felicidades, usuario! Has adivinado el número correctamente.")])
+    @patch('builtins.print')
+    def test_user_wins(self, mock_print, mock_get_validate_number, mock_set_number_computer, mock_set_number_user, mock_print_information, mock_get_random_number):
+        """
+        Test when the user guesses the correct number.
+        """
+        game()
         
-        # Configuración del mock
-        number_user.clear()
-        number_computer.clear()
-        number_user.append(50)
-        mock_validate_number.side_effect = lambda number, random_number, entity: number == random_number # Si el número es igual al número aleatorio, devuelve True
-
-        with patch('random.randint', return_value=50):  # Configura el número aleatorio
-            game()
-
-        # Verificaciones
-        mock_player_user.assert_called_once()  # Verifica que player_user se haya llamado
-        mock_validate_number.assert_called_with(50, 50, 'usuario')  # Verifica que validate_number se llame con los parámetros esperados
-        mock_player_computer.assert_not_called()  # Verifica que player_computer no se haya llamado porque el juego terminó antes
-
-        # Verifica que se imprimió el mensaje de juego terminado
+        mock_get_random_number.assert_called_once_with({'min': 1, 'max': 100})
+        mock_print_information.assert_called_once()
+        mock_set_number_user.assert_called_once_with([])
+        mock_set_number_computer.assert_called_once_with([50], '', {'min': 1, 'max': 100})
+        mock_get_validate_number.assert_called_once_with(50, 50, {'min': 1, 'max': 100}, 'usuario')
         mock_print.assert_any_call("¡Juego terminado!")
 
 
-    @patch('src.game.validate_number')
-    @patch('src.game.player_user')
-    @patch('src.game.player_computer')
-    @patch('builtins.print')  # Para capturar las salidas de print
-    def test_game_computer_wins(self, mock_print, mock_player_computer, mock_player_user, mock_validate_number):
-        """Test cuando el ordenador adivina el número correcto"""
+
+    @patch('src.game.get_random_number', return_value=50)
+    @patch('src.game.print_information')
+    @patch('src.game.set_number_user', return_value=(30, [30]))
+    @patch('src.game.set_number_computer', return_value=(50, [30, 50]))
+    @patch('src.game.get_validate_number', side_effect=[
+        (False, "El número ingresado no es correcto."),  # Primera llamada para el usuario
+        (True, "¡Felicidades, computadora! Has adivinado el número correctamente.")  # Segunda llamada para la computadora
+    ])
+    @patch('builtins.print')
+    def test_computer_wins(self, mock_print, mock_get_validate_number, mock_set_number_computer, mock_set_number_user, mock_print_information, mock_get_random_number):
+        """
+        Test when the user guesses the correct number.
+        """
+        game()
         
-        # Configuración del mock
-        number_user.clear()
-        number_computer.clear()
-        number_user.append(0)
-        number_computer.append(50)
-        mock_validate_number.side_effect = lambda number, random_number, entity: number == random_number # Si el número es igual al número aleatorio, devuelve True
-
-        with patch('random.randint', return_value=50):  # Configura el número aleatorio
-            game()
-
-        # Verificaciones
-        mock_player_user.assert_called_once()  # Verifica que player_user se haya llamado
-        mock_validate_number.assert_called_with(50, 50, 'ordenador')  # Verifica que validate_number se llame con los parámetros esperados
-        mock_player_computer.assert_called_once()  # Verifica que player_computer no se haya llamado porque el juego terminó antes
-
-        # Verifica que se imprimió el mensaje de juego terminado
+        mock_get_random_number.assert_called_once_with({'min': 1, 'max': 100})
+        mock_print_information.assert_called_once()
+        mock_set_number_user.assert_called_once_with([])
+        mock_set_number_computer.assert_called_once_with([30], '', {'min': 1, 'max': 100})
+        mock_get_validate_number.assert_has_calls([
+            call(30, 50, {'min': 1, 'max': 100}, 'usuario'),
+            call(50, 50, {'min': 1, 'max': 100}, 'computadora')
+            ])
         mock_print.assert_any_call("¡Juego terminado!")
+        
+    
+    @patch('src.game.get_random_number', return_value=50)
+    @patch('src.game.print_information')
+    @patch('src.game.set_number_user', side_effect=[(30, [30])] * 10)  # Simula 10 intentos del usuario
+    @patch('src.game.set_number_computer', side_effect=[(40, [30, 40])] * 10)  # Simula 10 intentos de la computadora
+    @patch('src.game.get_validate_number', side_effect=[
+        (False, "El número ingresado no es correcto."),
+        (False, "El número es mayor.")
+    ] * 10)  # Simula respuestas incorrectas
+    @patch('builtins.print')
+    def test_try_done_round_max_try(self, mock_print, mock_get_validate_number, mock_set_number_computer, mock_set_number_user, mock_print_information, mock_get_random_number):
+        """
+        Test when the maximum number of tries is reached.
+        """
+        game()
+        
+        mock_get_random_number.assert_called_once_with({'min': 1, 'max': 100})
+        mock_print_information.assert_called_once()
+        
+        self.assertEqual(mock_set_number_user.call_count, 10)
+        self.assertEqual(mock_set_number_computer.call_count, 10)
+        
+        mock_get_validate_number.assert_has_calls([
+            call(30, 50, {'min': 1, 'max': 100}, 'usuario'),
+            call(40, 50, {'min': 1, 'max': 100}, 'computadora')
+        ] * 10, any_order=False)
+        
+        mock_print.assert_any_call("¡Has agotado tus intentos!")
+        mock_print.assert_any_call("\nEl número a adivinar era: ", 50)
+        
