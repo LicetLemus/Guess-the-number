@@ -1,7 +1,9 @@
 import random
 
-list_number_user = []
-list_number_computer = []
+numbers_user = []
+numbers_computer = []
+numbers_user_computer = [] # lista con los números usuario y compu filtrada sin ceros, no repetidos
+
 
 def get_input_value():
     """
@@ -38,29 +40,29 @@ def set_number_user():
     """
     input_value = get_input_value()
     number_user_current = validate_number_user(input_value)
-    list_number_user.append(number_user_current)
-    return list_number_user
+    numbers_user.append(number_user_current)
+    return numbers_user
     
-
-def get_number_computer(number_user):
+#-------------------------------------------------------------computer------------------------------------------------------------
+def get_number_computer(feedback):
     """
     The function generates a random number for the computer.
     
     Args:
         number_user (int): The number entered by the user.
-        
     return:
         int: The number generated for the computer.
     """
-    if number_user == 0:
+    last_number_user = numbers_user[-1]
+    if feedback == "":
         return random.randint(1, 100)
-    elif number_user < 50:
-        return random.randint(number_user, 100)
-    elif number_user > 50:
-        return random.randint(1, number_user)
-
+    if feedback == "random es mayor":
+        return random.randint(last_number_user, 100)
+    elif feedback == "random es menor":
+        return random.randint(1, last_number_user)
     
-def set_number_computer(number_user):
+
+def set_number_computer(feedback):
     """
     This function call the get_number_computer function and add the number entered by the computer to a list.
     
@@ -70,9 +72,9 @@ def set_number_computer(number_user):
     Return:
         list: The list with the number entered by the computer.
     """
-    number_computer_current = get_number_computer(number_user)
-    list_number_computer.append(number_computer_current)
-    return list_number_computer
+    number_computer_current = get_number_computer(feedback)
+    numbers_computer.append(number_computer_current)
+    return numbers_computer
 
 
 def print_number_user_computer(number_user, number_computer):
