@@ -34,13 +34,13 @@ def game():
         print_number_user_computer(number_user, number_computer)
         
         is_correct_user, message_user = get_validate_number(number_user, number_random, ranges, "usuario")
+        feedback_list.append(message_user)
         print(message_user)
         if is_correct_user:
             print("¡Juego terminado!")
             break
         
         is_correct_computer, message_computer = get_validate_number(number_computer, number_random, ranges, "computadora")
-        feedback_list.append(message_computer)
         print(message_computer)
         if is_correct_computer:
             print("¡Juego terminado!")
