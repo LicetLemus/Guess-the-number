@@ -54,16 +54,13 @@ def get_number_computer(user_computer_numbers, feedback, ranges):
     last_number_user_computer = user_computer_numbers[-1]
     order_numbers_user_computer = sorted(set(user_computer_numbers))
     
-    try:
-        index = order_numbers_user_computer.index(last_number_user_computer)
-    except ValueError:
-        return random.randint(ranges["min"], ranges["max"])
+    index = order_numbers_user_computer.index(last_number_user_computer)
     
     if feedback == "":
         return random.randint(ranges["min"], ranges["max"])
     if feedback == "El número es mayor.":
         return random.randint(order_numbers_user_computer[index], order_numbers_user_computer[index + 1])
-    elif feedback == "El número es mayor.":
+    elif feedback == "El número es menor.":
         return random.randint(order_numbers_user_computer[index -1], order_numbers_user_computer[index])
     else:
         return random.randint(ranges["min"], ranges["max"])
