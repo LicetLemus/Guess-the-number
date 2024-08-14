@@ -22,7 +22,7 @@ def game():
     try_done_round = 0
     
     while try_done_round < MAX_TRY:
-        number_user, numbers_user_computer = set_number_user(numbers_user_computer)
+        number_user, numbers_user_computer = set_number_user(numbers_user_computer, ranges)
         if number_user is None:
             continue  # Si el número no es válido, pedir al usuario que intente de nuevo
         
