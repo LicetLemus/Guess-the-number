@@ -39,6 +39,6 @@ def get_validate_number(number, number_random, ranges, entity=""):
     elif number == number_random:
         return True, f"¡Ganaste {entity}!, adivinaste el número"
     elif number < number_random:
-        return False, f"{entity}: El número a adivinar es mayor"
+        return False, "random es mayor"
     else:
-        return False, f"{entity}: El número a adivinar es menor"
+        return False, "random es menor"
