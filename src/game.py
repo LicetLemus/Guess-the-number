@@ -34,13 +34,13 @@ def game():
         print_number_user_computer(number_user, number_computer)
         
         is_correct_user, message_user = get_validate_number(number_user, number_random, ranges, "usuario")
-        feedback_list.append(message_user)
         print(message_user)
         if is_correct_user:
             print("¡Juego terminado!")
             break
         
         is_correct_computer, message_computer = get_validate_number(number_computer, number_random, ranges, "computadora")
+        feedback_list.append(message_computer)
         print(message_computer)
         if is_correct_computer:
             print("¡Juego terminado!")
@@ -51,13 +51,12 @@ def game():
         if try_done_round == MAX_TRY:
             print("¡Has agotado tus intentos!")
             break
-        
+        print("------------------------------------", numbers_user_computer)
         print("Intentos restantes: ", MAX_TRY - try_done_round)
     print("\nEl número a adivinar era: ", number_random)
 
     # .join () method returns a string in which the elements of sequence have been
     # joined by str separator ' '.
     # .map() function returns a list of the results converted to string
-
     print("numeros introducidos por el usuario:", ' '.join(map(str, numbers_user_computer[::2]))) # Imprimir los números introducidos por el usuario impares
     print("numeros introducido por el ordenador:",' '.join(map(str, numbers_user_computer[1::2]))) # Imprimir los números introducidos por el ordenador pares

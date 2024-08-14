@@ -50,18 +50,24 @@ def get_number_computer(user_computer_numbers, feedback, ranges):
     """
     if not user_computer_numbers:
         return random.randint(ranges["min"], ranges["max"])
-    
+    print("------------------------------------", user_computer_numbers)
     last_number_user_computer = user_computer_numbers[-1]
     order_numbers_user_computer = sorted(set(user_computer_numbers))
-    
     index = order_numbers_user_computer.index(last_number_user_computer)
     
+    print("------------------------------------", order_numbers_user_computer)
     if feedback == "":
         return random.randint(ranges["min"], ranges["max"])
     if feedback == "El número es mayor.":
-        return random.randint(order_numbers_user_computer[index], order_numbers_user_computer[index + 1])
+        if index == len(order_numbers_user_computer) - 1: # si el número es mayor que el último número de la lista
+            return random.randint(order_numbers_user_computer[index], ranges["max"])
+        else:
+            return random.randint(order_numbers_user_computer[index], order_numbers_user_computer[index + 1])
     elif feedback == "El número es menor.":
-        return random.randint(order_numbers_user_computer[index -1], order_numbers_user_computer[index])
+        if index == 0:
+            return random.randint(ranges["min"], order_numbers_user_computer[index])
+        else:
+            return random.randint(order_numbers_user_computer[index -1], order_numbers_user_computer[index])
     else:
         return random.randint(ranges["min"], ranges["max"])
 
