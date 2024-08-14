@@ -6,7 +6,7 @@ def main():
     """
     while True:
         game()
-        play_again_user = input("¿Quieres jugar de nuevo? (s/n): ")
+        play_again_user = input("¿Quieres jugar de nuevo? (s/n): ").lower()
         if play_again_user == "n":
             print("¡Gracias por jugar!")
             break
