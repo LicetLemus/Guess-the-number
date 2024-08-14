@@ -44,7 +44,7 @@ def set_number_user():
     return numbers_user
     
 #-------------------------------------------------------------computer------------------------------------------------------------
-def get_number_computer(feedback):
+def get_number_computer(feedback, user_number):
     """
     The function generates a random number for the computer.
     
@@ -53,16 +53,16 @@ def get_number_computer(feedback):
     return:
         int: The number generated for the computer.
     """
-    last_number_user = numbers_user[-1]
     if feedback == "":
         return random.randint(1, 100)
     if feedback == "random es mayor":
-        return random.randint(last_number_user, 100)
+        return random.randint(user_number, 100)
     elif feedback == "random es menor":
-        return random.randint(1, last_number_user)
-    
+        return random.randint(1, user_number)
+    else:
+        return random.randint(1, 100)
 
-def set_number_computer(feedback):
+def set_number_computer(feedback, user_number):
     """
     This function call the get_number_computer function and add the number entered by the computer to a list.
     
@@ -72,7 +72,7 @@ def set_number_computer(feedback):
     Return:
         list: The list with the number entered by the computer.
     """
-    number_computer_current = get_number_computer(feedback)
+    number_computer_current = get_number_computer(feedback, user_number)
     numbers_computer.append(number_computer_current)
     return numbers_computer
 

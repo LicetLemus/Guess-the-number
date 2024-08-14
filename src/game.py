@@ -22,7 +22,7 @@ def game():
     while try_done_round < MAX_TRY:
         print("----------------------------------", message_feedback)
         number_user = set_number_user()
-        number_computer = set_number_computer(message_feedback[-1])
+        number_computer = set_number_computer(message_feedback[-1], number_user[-1])
         print_number_user_computer(number_user, number_computer)
         
         is_correct_user, message_user = get_validate_number(number_user[-1], number_random, ranges, "usuario")
