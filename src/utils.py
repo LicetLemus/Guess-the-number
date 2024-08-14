@@ -33,7 +33,7 @@ def get_validate_number(number, number_random, ranges, entity=""):
         bool: True if the number is correct, False otherwise.
         str: A message indicating if the number is correct or not.
     """
-    print("number------------------------------------", number)
+
     if not (ranges['min'] <= number <= ranges['max']):
         return False, f"{entity}: El número no es válido. Debe estar entre {ranges['min']} y {ranges['max']}."
     elif number == number_random:

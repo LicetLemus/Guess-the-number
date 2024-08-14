@@ -19,6 +19,8 @@ def game():
     numbers_user_computer = []  # Lista para almacenar los números introducidos por ambos
     feedback_list = [""]
     
+    try_done_round = 0
+    
     while try_done_round < MAX_TRY:
         number_user, numbers_user_computer = set_number_user(numbers_user_computer)
         if number_user is None:
@@ -56,6 +58,9 @@ def game():
     # .join () method returns a string in which the elements of sequence have been
     # joined by str separator ' '.
     # .map() function returns a list of the results converted to string
+    print("------", numbers_user_computer)
+    print("------", feedback_list)
+    
     print("numeros introducidos por el usuario:", ' '.join(map(str, numbers_user_computer[:len(numbers_user_computer)//2]))) # Imprimir los números introducidos por el usuario
 
     print("numeros introducido por el ordenador:",' '.join(map(str, numbers_user_computer[len(numbers_user_computer)//2:]))) # Imprimir los números introducidos por el ordenador

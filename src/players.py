@@ -37,12 +37,7 @@ def set_number_user(user_computer_numbers):
     if number_user is not None:
         user_computer_numbers.append(number_user)
     return number_user, user_computer_numbers
-    
-    return number_user, user_computer_numbers
-    # numbers_user.append(number_user_current)
-    # numbers_user_computer.append(number_user_current)
-    # return numbers_user
-    
+
 #-------------------------------------------------------------computer------------------------------------------------------------
 def get_number_computer(user_computer_numbers, feedback, ranges):
     """
@@ -72,6 +67,7 @@ def get_number_computer(user_computer_numbers, feedback, ranges):
         return random.randint(order_numbers_user_computer[index -1], order_numbers_user_computer[index])
     else:
         return random.randint(ranges["min"], ranges["max"])
+
 
 def set_number_computer(user_computer_numbers, feedback, ranges):
     """
