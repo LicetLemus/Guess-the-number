@@ -58,9 +58,6 @@ def game():
     # .join () method returns a string in which the elements of sequence have been
     # joined by str separator ' '.
     # .map() function returns a list of the results converted to string
-    print("------", numbers_user_computer)
-    print("------", feedback_list)
-    
-    print("numeros introducidos por el usuario:", ' '.join(map(str, numbers_user_computer[:len(numbers_user_computer)//2]))) # Imprimir los números introducidos por el usuario
 
-    print("numeros introducido por el ordenador:",' '.join(map(str, numbers_user_computer[len(numbers_user_computer)//2:]))) # Imprimir los números introducidos por el ordenador
+    print("numeros introducidos por el usuario:", ' '.join(map(str, numbers_user_computer[::2]))) # Imprimir los números introducidos por el usuario impares
+    print("numeros introducido por el ordenador:",' '.join(map(str, numbers_user_computer[1::2]))) # Imprimir los números introducidos por el ordenador pares
