@@ -16,9 +16,9 @@ def get_random_number(ranges):
         
     return : int: The random number generated.
     """
-    min = ranges["min"]
-    max = ranges["max"]
-    number_random = random.randint(min, max)
+    min_range = ranges["min"]
+    max_range = ranges["max"]
+    number_random = random.randint(min_range, max_range)
     return number_random
 
 def get_validate_number(number, number_random, ranges, entity=""):
@@ -34,11 +34,11 @@ def get_validate_number(number, number_random, ranges, entity=""):
         str: A message indicating if the number is correct or not.
     """
     print("number------------------------------------", number)
-    if number < ranges['min'] or number > ranges['max']:
-        return False, f"{entity}: El número no es válido"
+    if not (ranges['min'] <= number <= ranges['max']):
+        return False, f"{entity}: El número no es válido. Debe estar entre {ranges['min']} y {ranges['max']}."
     elif number == number_random:
-        return True, f"¡Ganaste {entity}!, adivinaste el número"
+        return True, f"¡Felicidades, {entity}! Has adivinado el número correctamente."
     elif number < number_random:
-        return False, "random es mayor"
+        return False, "El número es mayor."
     else:
-        return False, "random es menor"
+        return False, "El número es menor."

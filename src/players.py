@@ -66,9 +66,9 @@ def get_number_computer(user_computer_numbers, feedback, ranges):
     
     if feedback == "":
         return random.randint(ranges["min"], ranges["max"])
-    if feedback == "random es mayor":
+    if feedback == "El número es mayor.":
         return random.randint(order_numbers_user_computer[index], order_numbers_user_computer[index + 1])
-    elif feedback == "random es menor":
+    elif feedback == "El número es mayor.":
         return random.randint(order_numbers_user_computer[index -1], order_numbers_user_computer[index])
     else:
         return random.randint(ranges["min"], ranges["max"])
@@ -92,6 +92,6 @@ def print_number_user_computer(number_user, number_computer):
     """
     The function prints the number entered by the user and the computer.
     """
-    print("El usuario ha introducido el número: ", number_user[-1])
-    print("El ordenador ha introducido el número: ", number_computer[-1])
+    print("El usuario ha introducido el número: ", number_user)
+    print("El ordenador ha introducido el número: ", number_computer)
     
