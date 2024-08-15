@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import patch, call # los patch se utilizan para simular la entrada de datos, sustituyendo la función original temporalmente mientras se ejecutan las pruebas
-from src.players import get_input_value, set_number_user, get_number_computer, set_number_computer, print_number_user_computer
+from src.players import get_input_value, validate_number_user, set_number_user, get_number_computer, set_number_computer, print_number_user_computer
 
 class TestPlayers(unittest.TestCase):
     """
@@ -15,17 +15,38 @@ class TestPlayers(unittest.TestCase):
         result = get_input_value()
         self.assertEqual(result, '5') 
 
-    # def test_validate_number_user_valid(self):
+
+    # def test_validate_number_user_not_digit(self):
     #     """
     #     Test the validate_number_user function.
     #     """
-    #     result = validate_number_user('5')
+    #     ranges = {
+    #         "min": 1,
+    #         "max": 100
+    #     }
+    #     result = validate_number_user('gtheds', ranges)
+    #     self.assertIsNone(result)
+
+    # # def test_validate_number_user_valid(self):
+    # #     """
+    # #     Test the validate_number_user function.
+    # #     """
+    # #     ranges = {
+    # #         "min": 1,
+    # #         "max": 100
+    # #     }
+        
+    #     result = validate_number_user('5', ranges)
     #     self.assertEqual(result, 5)
     
-    # def test_validate_number_user_invalid(self):
-    #     # Test para un número no válido (no es un número)
-    #     result = validate_number_user('abc')
-    #     self.assertIsNone(result)
+    def test_validate_number_user_invalid(self):
+        # Test para un número no válido (no es un número)
+        ranges = {
+            "min": 1,
+            "max": 100
+        }
+        result = validate_number_user('101', ranges)
+        self.assertIsNone(result)
         
     
     @patch('src.players.get_input_value', return_value='7')
@@ -33,8 +54,12 @@ class TestPlayers(unittest.TestCase):
         """
         Test the player_computer function when the random number is smaller than the user number.
         """
+        ranges = {
+            "min": 1,
+            "max": 100
+        }
         user_computer_numbers = []
-        number_user, update_user_computer_numbers = set_number_user(user_computer_numbers)
+        number_user, update_user_computer_numbers = set_number_user(user_computer_numbers, ranges)
         self.assertEqual(number_user, 7)
         self.assertIn(7, update_user_computer_numbers) # assertIn()verifica si el elemento está en la lista
 
@@ -44,8 +69,12 @@ class TestPlayers(unittest.TestCase):
         """
         Test the set_number_user function with an invalid number.
         """
+        ranges = {
+            "min": 1,
+            "max": 100
+        }
         user_computer_numbers = []
-        number_user, updated_user_computer_numbers = set_number_user(user_computer_numbers)
+        number_user, updated_user_computer_numbers = set_number_user(user_computer_numbers, ranges)
         self.assertEqual(number_user, None)
         self.assertEqual(updated_user_computer_numbers, [])
 
